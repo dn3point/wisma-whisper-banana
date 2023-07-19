@@ -1,9 +1,9 @@
 from potassium import Potassium, Request, Response
 from transformers import pipeline
+from constants import get_whisper_model
 import torch
 import boto3
 import os
-import constants
 
 # create a new Potassium app
 app = Potassium("my_app")
@@ -13,7 +13,7 @@ app = Potassium("my_app")
 def init():
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     model = pipeline(
-        model=f"openai/whisper-{constants.get_whisper_model()}.en",
+        model=f"openai/whisper-{get_whisper_model()}.en",
         chunk_length_s=30,
         device=device,
     )
