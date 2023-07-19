@@ -17,7 +17,6 @@ ENV WHISPER_MODELS=$WHISPER_MODELS
 
 # Add your model weight files 
 # (in this case we have a python script)
-ADD constants.py .
 ADD download.py .
 RUN python3 download.py
 

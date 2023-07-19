@@ -1,13 +1,21 @@
+from functools import lru_cache
 from potassium import Potassium, Request, Response
 from transformers import pipeline
 import torch
 import boto3
 import os
 
-from .constants import get_whisper_model
-
 # create a new Potassium app
 app = Potassium("my_app")
+
+WHISPER_MODELS = {"tiny", "base", "small", "medium"}
+
+
+@lru_cache(maxsize=1)
+def get_whisper_model() -> str:
+    model = os.getenv("WHISPER_MODEL", "small")
+    model = "small" if model not in WHISPER_MODELS else model
+    return model
 
 
 # @app.init runs at startup, and loads models into the app's context
