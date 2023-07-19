@@ -3,13 +3,15 @@
 
 from transformers import pipeline
 import torch
+import constants
+
 
 def download_model():
     # do a dry run of loading the huggingface model, which will download weights
     # typically, you want this single pipeline() call to match what is in your app.py
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     pipeline(
-        model='openai/whisper-base',
+        model=f'openai/whisper-{constants.get_whisper_model()}.en',
         chunk_length_s=30,
         device=device,
     )
