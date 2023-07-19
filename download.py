@@ -2,7 +2,7 @@
 # In this example: A Whisper model
 
 from transformers import pipeline
-from constants import get_whisper_model
+from utils.constants import get_whisper_model
 import torch
 
 

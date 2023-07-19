@@ -1,9 +1,10 @@
 from potassium import Potassium, Request, Response
 from transformers import pipeline
-from constants import get_whisper_model
 import torch
 import boto3
 import os
+
+from utils.constants import get_whisper_model
 
 # create a new Potassium app
 app = Potassium("my_app")
