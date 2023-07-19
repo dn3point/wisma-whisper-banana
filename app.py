@@ -4,10 +4,11 @@ import torch
 import boto3
 import os
 
-from utils.constants import get_whisper_model
+from .utils.constants import get_whisper_model
 
 # create a new Potassium app
 app = Potassium("my_app")
+
 
 # @app.init runs at startup, and loads models into the app's context
 @app.init
@@ -28,14 +29,11 @@ def init():
 
     # get bucket from environment variable
     bucket = os.environ.get("AWS_BUCKET")
-   
-    context = {
-        "model": model,
-        "s3": s3,
-        "bucket": bucket
-    }
+
+    context = {"model": model, "s3": s3, "bucket": bucket}
 
     return context
+
 
 # @app.handler runs for every call
 @app.handler()
@@ -52,16 +50,11 @@ def handler(context: dict, request: Request) -> Response:
 
         # run inference on the sample
         model = context.get("model")
-        outputs = model(
-            sample, 
-            batch_size=8
-        )
+        outputs = model(sample, batch_size=8)
 
         # return output JSON to the client
-        return Response(
-            json = {"outputs": outputs}, 
-            status=200
-        )
+        return Response(json={"outputs": outputs}, status=200)
+
 
 if __name__ == "__main__":
     app.serve()

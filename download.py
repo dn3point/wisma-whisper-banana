@@ -2,7 +2,7 @@
 # In this example: A Whisper model
 
 from transformers import pipeline
-from utils.constants import get_whisper_model
+from .utils.constants import get_whisper_model
 import torch
 
 
@@ -11,10 +11,11 @@ def download_model():
     # typically, you want this single pipeline() call to match what is in your app.py
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     pipeline(
-        model=f'openai/whisper-{get_whisper_model()}.en',
+        model=f"openai/whisper-{get_whisper_model()}.en",
         chunk_length_s=30,
         device=device,
     )
+
 
 if __name__ == "__main__":
     download_model()
