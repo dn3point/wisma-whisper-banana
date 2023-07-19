@@ -12,8 +12,8 @@ RUN pip3 install --upgrade pip
 ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
-ARG WHISPER_MODELS
-ENV WHISPER_MODELS=$WHISPER_MODELS
+ARG WHISPER_MODEL
+ENV WHISPER_MODEL=$WHISPER_MODEL
 
 # Add your model weight files 
 # (in this case we have a python script)
